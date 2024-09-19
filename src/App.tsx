@@ -178,6 +178,7 @@ export const App: React.FC = () => {
           todos={todos}
           onToggle={handleCheckUpdate.multipleTodos}
           onAdding={handleAddingTodo}
+          onError={setErrorMessage}
         />
 
         {/*I've added children prop to avoid prop drilling*/}

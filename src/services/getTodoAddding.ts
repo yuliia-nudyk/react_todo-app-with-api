@@ -11,12 +11,6 @@ export function getTodoAdding({
   onTodoAdding,
   onError,
 }: AddingParams) {
-  if (!newTodoTitle) {
-    onError(ErrorMessages.Title);
-
-    return Promise.reject();
-  }
-
   const addedTodo: Todo = {
     id: 0,
     userId: userId,

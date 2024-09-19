@@ -3,17 +3,20 @@ import cn from 'classnames';
 import { Todo } from '../../types/Todo';
 
 import './Header.scss';
+import { ErrorMessages } from '../../types/Errors';
 
 type Props = {
   todos: Todo[];
   onToggle: (toggledIds: number[], toggledTodos: Todo[]) => void;
-  onAdding: (newTodoTitle: string) => Promise<void> | undefined;
+  onAdding: (newTodoTitle: string) => Promise<void>;
+  onError: (errorMessages: ErrorMessages) => void;
 };
 
 export const Header: React.FC<Props> = memo(function Header({
   todos,
   onToggle,
   onAdding,
+  onError,
 }) {
   const areAllTodosCompleted = todos.every(todo => todo.completed);
 
@@ -29,10 +32,18 @@ export const Header: React.FC<Props> = memo(function Header({
       return;
     }
 
+    const trimmedTodo = newTodo.trim();
+
+    if (!trimmedTodo) {
+      onError(ErrorMessages.Title);
+
+      return;
+    }
+
     addTodoInput.disabled = true;
 
-    onAdding(newTodo.trim())
-      ?.then(() => setNewTodo(''))
+    onAdding(trimmedTodo)
+      .then(() => setNewTodo(''))
       .finally(() => {
         addTodoInput.disabled = false;
         addTodoInput.focus();
