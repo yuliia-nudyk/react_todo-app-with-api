@@ -47,11 +47,19 @@ export const App: React.FC = () => {
 
   const getFilteredTodos = useCallback(
     (allTodos: Todo[], status: FilterStatus) => {
-      let filteredTodos = [...allTodos];
+      let filteredTodos;
       const { active, completed } = sortedTodos;
 
-      if (status) {
-        filteredTodos = status === FilterStatus.Completed ? completed : active;
+      switch (status) {
+        case FilterStatus.Completed:
+          filteredTodos = completed;
+          break;
+        case FilterStatus.Active:
+          filteredTodos = active;
+          break;
+
+        default:
+          filteredTodos = [...allTodos];
       }
 
       return filteredTodos;

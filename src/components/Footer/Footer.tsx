@@ -31,44 +31,21 @@ export const Footer: React.FC<Props> = memo(function Footer({
       </span>
 
       <nav className="filter" data-cy="Filter">
-        <a
-          href="#/"
-          className={cn('filter__link', {
-            selected: filterStatus === FilterStatus.All,
-          })}
-          data-cy="FilterLinkAll"
-          onClick={() => {
-            onStatusChange(FilterStatus.All);
-          }}
-        >
-          All
-        </a>
-
-        <a
-          href="#/active"
-          className={cn('filter__link', {
-            selected: filterStatus === FilterStatus.Active,
-          })}
-          data-cy="FilterLinkActive"
-          onClick={() => {
-            onStatusChange(FilterStatus.Active);
-          }}
-        >
-          Active
-        </a>
-
-        <a
-          href="#/completed"
-          className={cn('filter__link', {
-            selected: filterStatus === FilterStatus.Completed,
-          })}
-          data-cy="FilterLinkCompleted"
-          onClick={() => {
-            onStatusChange(FilterStatus.Completed);
-          }}
-        >
-          Completed
-        </a>
+        {Object.values(FilterStatus).map(status => (
+          <a
+            key={status}
+            href="#/"
+            className={cn('filter__link', {
+              selected: filterStatus === status,
+            })}
+            data-cy="FilterLinkAll"
+            onClick={() => {
+              onStatusChange(status);
+            }}
+          >
+            {status}
+          </a>
+        ))}
       </nav>
 
       <button

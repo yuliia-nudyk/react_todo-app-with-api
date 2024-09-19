@@ -50,9 +50,7 @@ export const FormTodoTitle: React.FC<Props> = ({ todo, onTitleChange }) => {
         onChange={e => {
           setNewTitle(e.target.value);
         }}
-        onBlur={() => {
-          handleTitleChange();
-        }}
+        onBlur={handleTitleChange}
       />
     </form>
   );

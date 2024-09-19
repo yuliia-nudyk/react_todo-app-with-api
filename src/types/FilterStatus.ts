@@ -1,5 +1,5 @@
 export enum FilterStatus {
-  All = '',
+  All = 'All',
   Active = 'Active',
   Completed = 'Completed',
 }
