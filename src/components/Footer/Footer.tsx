@@ -38,10 +38,8 @@ export const Footer: React.FC<Props> = memo(function Footer({
             className={cn('filter__link', {
               selected: filterStatus === status,
             })}
-            data-cy="FilterLinkAll"
-            onClick={() => {
-              onStatusChange(status);
-            }}
+            data-cy={`FilterLinkAll${status}`}
+            onClick={() => onStatusChange(status)}
           >
             {status}
           </a>
